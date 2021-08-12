@@ -10,7 +10,6 @@ public class SistemaCoordenadas2D {
     public static void main(String[] args) {
         cartesianas2D punto = new cartesianas2D();
         Polar punto2 = new Polar();
-        cartesianas2D punto3 = new cartesianas2D(Punto2);
         //agregar las instrucciones necesarias para que se presente
         //en pantalla la solicitud de los datos y posterirmente 
         //el usuario los ingrese desde el teclado
@@ -19,43 +18,77 @@ public class SistemaCoordenadas2D {
 }
 class cartesianas2D{
     
-    private int x,y;
+    private double x,y;
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
+    }
+
+    
+    
+    public cartesianas2D polar_cartesiana2D(double r, double angulo){
+        cartesianas2D obj = new cartesianas2D();
+        x = r*Math.cos(angulo);
+        y = r*Math.cos(angulo);
+        
+        return obj;
+    }
+    
+    public cartesianas2D polar_cartesiana2D(Polar p){
+        return polar_cartesiana2D(p.getRadio(),p.getAngulo());
     }
     
 }
 class Polar{
    
-    private int radio;
-    private float angulo;
+    private double radio;
+    private double angulo;
+    
+    public Polar(){
+    }
 
-    public int getRadio() {
+    public Polar(double radio, double angulo) {
+        this.radio = radio;
+        this.angulo = angulo;
+    }
+
+    public double getRadio() {
         return radio;
     }
 
-    public void setRadio(int radio) {
+    public void setRadio(double radio) {
         this.radio = radio;
     }
 
-    public float getAngulo() {
+    public double getAngulo() {
         return angulo;
     }
 
-    public void setAngulo(float angulo) {
+    public void setAngulo(double angulo) {
         this.angulo = angulo;
     }
+    
+    public Polar cartesiana2D_polar(double x, double y){
+        double r = Math.sqrt(x*x+y*y);
+        double ang = Math.atan(y/x);
+        return new Polar(r, ang); 
+    }
+    
+    public Polar cartesiana2D_polar(cartesianas2D c){
+        return new Polar(c.getX(), c.getY());
+    }
+
+  
 }
